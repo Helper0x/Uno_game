@@ -1,4 +1,4 @@
-# 26.01.24
+# 26.01.24 -> 1.02.24
 
 # Class import
 from Class.carta import Carta
