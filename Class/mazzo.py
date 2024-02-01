@@ -1,17 +1,12 @@
 # 26.01.24
 
 # Class import
-from Class.carta import Carta
+from Class.carta import Carta, AVAILABLE_COLORS, AVAILABLE_NUMBERS, SPECIAL_CARDS
 
 # General import
 import random
 
 class Mazzo():
-
-    SPECIAL_CARDS = ["+4", "cambio_giro", "new_colore"]
-    AVAILABLE_COLORS = ["r", "g", "v", "b"]
-    AVAILABLE_NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+2", "divieto"]
-
     def __init__(self, n_player: int):
         self.mazzo = []
         self.mazzo_usato = []
@@ -20,12 +15,12 @@ class Mazzo():
         for _ in range(n_player):
 
             # Carte normali 
-            for color in self.AVAILABLE_COLORS:
-                for number in self.AVAILABLE_NUMBERS:
+            for color in AVAILABLE_COLORS:
+                for number in AVAILABLE_NUMBERS:
                     self.mazzo.append(Carta(color, number))
 
             # Carte speciali
-            for special in self.SPECIAL_CARDS:
+            for special in SPECIAL_CARDS:
                 self.mazzo.append(Carta("null", special))
 
         # Fai uno shuffle sul mazzon inizale
@@ -83,13 +78,3 @@ class Mazzo():
                 # Rimuovila dl mazzo
                 del self.mazzo[i]
                 break
-
-    def to_string(self, show:bool=False):
-        s = ""
-        
-        for i, card in enumerate(self.mazzo):
-            if show: 
-                print(f"{i}: {card.to_string()}")
-            s += f"{i}: {card.to_string() }"
-
-        return s
