@@ -41,6 +41,12 @@ class Mano():
                 indici_validi.append(i)
 
         return indici_validi
+    
+    def search_type(self, tipo_cercare: str):
+        for i in range(len(self.player)):
+            if self.player[i].tipo == tipo_cercare:
+                return i
+        return -1
 
     def to_string(self, show:bool = False):
         s = ""
