@@ -7,6 +7,7 @@ from Class.mazzo import Mazzo
 # General import
 import random
 
+# [ class ]
 class Mano():
     carte_per_giocatore = 7
     

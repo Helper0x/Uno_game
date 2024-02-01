@@ -8,6 +8,13 @@ from Class.mano import Mano
 # Variabili
 numero_player = 3
 
+def nuova_posizione(lista, posizione_attuale, spostamento):
+    if 0 <= posizione_attuale <= len(lista):
+        return (posizione_attuale + spostamento) % len(lista)
+
+def cambia_giro_invertito(lista_giocatori, index_giocatore_selezionato):
+    nuova_lista_giocatori = lista_giocatori[index_giocatore_selezionato:] + lista_giocatori[:index_giocatore_selezionato]
+    return nuova_lista_giocatori[::-1]
 
 def fai_mossa(index_turno: int, mazzo_iniziale: Mazzo, mazzi_giocatori: Mano):
 
@@ -75,14 +82,6 @@ def fai_mossa(index_turno: int, mazzo_iniziale: Mazzo, mazzi_giocatori: Mano):
         fai_mossa(index_turno, mazzo_iniziale, mazzi_giocatori)
 
     print("\n")
-
-def nuova_posizione(lista, posizione_attuale, spostamento):
-    if 0 <= posizione_attuale <= len(lista):
-        return (posizione_attuale + spostamento) % len(lista)
-
-def cambia_giro_invertito(lista_giocatori, index_giocatore_selezionato):
-    nuova_lista_giocatori = lista_giocatori[index_giocatore_selezionato:] + lista_giocatori[:index_giocatore_selezionato]
-    return nuova_lista_giocatori[::-1]
 
 def main():
 

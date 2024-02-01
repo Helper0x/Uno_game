@@ -6,6 +6,7 @@ from Class.carta import Carta, AVAILABLE_COLORS, AVAILABLE_NUMBERS, SPECIAL_CARD
 # General import
 import random
 
+# [ class ]
 class Mazzo():
     def __init__(self, x_cost):
         self.mazzo = []
