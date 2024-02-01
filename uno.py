@@ -13,7 +13,7 @@ def fai_mossa(index_turno: int, mazzo_iniziale: Mazzo, mazzi_giocatori: Mano):
 
     print("\n####################")
     print(f"-> Id giocatore: {mazzi_giocatori[index_turno].id_giocatore}")
-    carta_al_centro = mazzo_iniziale.get_carta_al_centro()
+    carta_al_centro = mazzo_iniziale.carta_al_centro
     print(f"-> Carta al centro: {carta_al_centro.to_string()}")
     print(f"-> Carte giocatore: {mazzi_giocatori[index_turno].to_string(False)}")
     print(f"-> Carte valide: {mazzi_giocatori[index_turno].get_carte_valide(carta_al_centro)}")

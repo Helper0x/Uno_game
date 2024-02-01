@@ -7,12 +7,12 @@ from Class.carta import Carta, AVAILABLE_COLORS, AVAILABLE_NUMBERS, SPECIAL_CARD
 import random
 
 class Mazzo():
-    def __init__(self, n_player: int):
+    def __init__(self, x_cost):
         self.mazzo = []
         self.mazzo_usato = []
 
         # Creazione mazzo
-        for _ in range(n_player):
+        for _ in range(x_cost):
 
             # Carte normali 
             for color in AVAILABLE_COLORS:
@@ -31,11 +31,12 @@ class Mazzo():
         # Ottiene una carte random dal mazzo sul tavolo
         self.carta_al_centro = random.choice(self.mazzo)
 
+        # Non può essere speciale, quindi riprova
+        if self.carta_al_centro.colore == "null" or not self.carta_al_centro.tipo.isdigit():
+            self.inizia()
+
         # Rimuove la carta dal mazzo appena presa
         self.delete_card(self.carta_al_centro)
-
-    def get_carta_al_centro(self) -> (Carta):
-        return self.carta_al_centro
 
     def get_carta_random(self) -> (Carta):
 
