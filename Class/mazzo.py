@@ -22,7 +22,7 @@ class Mazzo():
 
             # Carte speciali
             for special in SPECIAL_CARDS:
-                self.mazzo.append(Carta("null", special))
+                self.mazzo.append(Carta("nera", special))
 
         # Fai uno shuffle sul mazzon inizale
         random.shuffle(self.mazzo)
@@ -33,7 +33,7 @@ class Mazzo():
         self.carta_al_centro = random.choice(self.mazzo)
 
         # Non può essere speciale, quindi riprova
-        if self.carta_al_centro.colore == "null" or not self.carta_al_centro.tipo.isdigit():
+        if self.carta_al_centro.colore == "nera" or not self.carta_al_centro.tipo.isdigit():
             self.inizia()
 
         # Rimuove la carta dal mazzo appena presa

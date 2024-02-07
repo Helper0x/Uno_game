@@ -1,7 +1,7 @@
 # 26.01.24 -> 1.02.24
 
 # Class import
-from Class.carta import Carta, AVAILABLE_COLORS, AVAILABLE_NUMBERS
+from Class.carta import Carta, AVAILABLE_COLORS
 from Class.mazzo import Mazzo
 from Class.mano import Mano
 
@@ -25,6 +25,7 @@ def suppress_print():
     finally:
         sys.stdout = original_stdout
 
+
 def nuova_posizione(lista, posizione_attuale, spostamento):
     return (posizione_attuale + spostamento) % len(lista)
 
@@ -38,7 +39,7 @@ def play_color(is_re, mazzo: Mazzo):
     else:
         color_counts = {col: 0 for col in AVAILABLE_COLORS}
         for carte in mazzo.player:
-            if carte.colore != "null":  # Escludi carte speciali
+            if carte.colore != "nera":  # Escludi carte speciali
                 color_counts[carte.colore] += 1
         return max(color_counts, key=color_counts.get)
 
@@ -55,7 +56,7 @@ def get_best_by_color(carte_centro: Carta, mazzo: Mano):
     colori_carte = {col: [] for col in AVAILABLE_COLORS}
     for i in range(len(mazzo.player)):
         carta = mazzo.player[i]
-        if carta.colore != "null":
+        if carta.colore != "nera":
             colori_carte[carta.colore].append(i)
 
     indici_colori_centro = colori_carte[carte_centro.colore]
@@ -159,7 +160,7 @@ def fai_mossa(index_turno: int, mazzo_iniziale: Mazzo, mazzi_giocatori: Mano):
                     
         elif carta_scelta.tipo == "new_colore":
             nuovo_colore_scelto = logic_stategia(id_giocatore, carta_al_centro, mazzi_giocatori[index_turno], len(mazzi_giocatori[(index_turno+2) % len(giocatori)].player), True)
-            print(f"--> Colore scelto: {indice_carta_scelta}")
+            print(f"--> Colore scelto: {nuovo_colore_scelto}")
             mazzo_iniziale.carta_al_centro = Carta(nuovo_colore_scelto, None)
 
         elif carta_scelta.tipo == "divieto":
@@ -234,4 +235,4 @@ def statistica():
 
     print(stat)
 
-statistica()
+main()
