@@ -9,13 +9,11 @@ import random
 
 # [ class ]
 class Mano():
-    carte_per_giocatore = 7
-    
     def __init__(self, mazzo: Mazzo, id_giocatore: str):
         self.id_giocatore = id_giocatore
-        self.player = random.sample(mazzo.mazzo, self.carte_per_giocatore)
+        self.player = random.sample(mazzo.mazzo, 7)
 
-        # Rimuovi le carte dal mazzo appena prese
+        # Rimuovi le carte appena inserite
         for card in self.player:
             mazzo.delete_card(card)
 
@@ -30,19 +28,23 @@ class Mano():
                 del self.player[i]
                 break
     
-    def is_carta_possibile(self, carta_scelta: Carta, carta_al_centro: Carta):
+    def is_carta_possibile(self, carta_scelta: Carta, carta_al_centro: Carta) -> (bool):
         return ( carta_scelta.colore == carta_al_centro.colore or carta_scelta.tipo == carta_al_centro.tipo ) or ( carta_scelta.tipo in SPECIAL_CARDS )
 
-    def get_carte_valide(self, carta_al_centro: Carta):
-        indici_validi = []
-
-        for i in range(len(self.player)):
-            if self.is_carta_possibile(self.player[i], carta_al_centro):
-                indici_validi.append(i)
-
-        return indici_validi
+    def get_carte_valide(self, carta_al_centro: Carta) -> list[int]:
+        return [i for i in range(len(self.player)) if self.is_carta_possibile(self.player[i], carta_al_centro)]
     
-    def search_type(self, tipo_cercare: str):
+    def get_vettore_pesi(self, carta_al_centro: Carta) -> list[list]:
+        carte_valide = self.get_carte_valide(carta_al_centro)
+        if len(carte_valide) > 0: 
+            carte_pesi = [[carte_i, self.player[carte_i].get_peso()]  for carte_i in self.get_carte_valide(carta_al_centro)]
+
+            # Togli carte con None e riordina
+            carte_pesi_valide = list(filter(lambda x: None not in x, carte_pesi))
+            return sorted(carte_pesi_valide, key=lambda x: x[1])
+        else: return []
+
+    def search_type(self, tipo_cercare: str) -> (int):
         for i in range(len(self.player)):
             if self.player[i].tipo == tipo_cercare:
                 return i

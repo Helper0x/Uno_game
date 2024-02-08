@@ -12,7 +12,6 @@ class Mazzo():
         self.mazzo = []
         self.mazzo_usato = []
 
-        # Creazione mazzo
         for _ in range(x_cost):
 
             # Carte normali 
@@ -35,9 +34,10 @@ class Mazzo():
         # Non può essere speciale, quindi riprova
         if self.carta_al_centro.colore == "nera" or not self.carta_al_centro.tipo.isdigit():
             self.inizia()
-
-        # Rimuove la carta dal mazzo appena presa
-        self.delete_card(self.carta_al_centro)
+            
+        else:
+            # Rimuove la carta dal mazzo appena presa
+            self.delete_card(self.carta_al_centro)
 
     def get_carta_random(self) -> (Carta):
 
